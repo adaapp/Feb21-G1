@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
-    res.sendFile("create-tutorial.html", { root: __dirname })
+    res.sendFile("public/create-tutorial.html", { root: __dirname })
 });
 app.get('/api/get-all-insturctions', function(req, res) {
     query.getInstruction(db,req,res)

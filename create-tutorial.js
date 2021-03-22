@@ -38,52 +38,55 @@ function beginTutorialCreation() {
 
     let steps = [];
 
-    document.querySelector('#new-step').addEventListener('click', function() {
-        let step = new Step;
-        step.id = generateId('step');
+    document.querySelector('#submit-tutorial').addEventListener('click', function() {
+        document.querySelector('#create-steps-ui-container').classList.remove('hidden');
 
-        let currentStepData = [];
+        document.querySelector('#new-step').addEventListener('click', function() {
+            let step = new Step;
+            step.id = generateId('step');
 
-        let inputTitle = document.querySelector('#input-step-title');
-        let inputMedia = document.querySelector('#input-media');
-        let inputCaption = document.querySeletcor('#input-caption');
+            let currentStepData = [];
 
-        //input validation, cannot continue without populating fields
-        if (inputTitle.value == '') {alert('Input a title for the step')}
-        else {currentStepData.push(inputTitle.value)}
+            let inputTitle = document.querySelector('#input-step-title');
+            let inputMedia = document.querySelector('#input-media');
+            let inputCaption = document.querySelector('#input-caption');
 
-        /*
-        if (inputMedia.files.length == 0) {alert('upload a file for the step')}
-        else {currentStepData.push(inputMedia.files[0])}
-        */
-        
-        //placeholder
-        currentStepData.push('media placeholder')
+            //input validation, cannot continue without populating fields
+            if (inputTitle.value == '') {alert('Input a title for the step')}
+            else {currentStepData.push(inputTitle.value)}
 
-        if (inputCaption.value == '') {alert('Input a caption for the step')}
-        else {currentStepData.push(inputCaption.value)}
+            /*
+            if (inputMedia.files.length == 0) {alert('upload a file for the step')}
+            else {currentStepData.push(inputMedia.files[0])}
+            */
+            
+            //placeholder
+            currentStepData.push('media placeholder')
 
-        //assign input to new step object of Step class
-        if (currentStepData.length == 3) {
-            step.title = currentStepData[0];
-            step.media = currentStepData[1];
-            step.caption = currentStepData[2];
-            steps.push(step);
-        }
+            if (inputCaption.value == '') {alert('Input a caption for the step')}
+            else {currentStepData.push(inputCaption.value)}
 
-        console.log('tutorial:', tutorial);
-        console.log('steps:', steps);
+            //assign input to new step object of Step class
+            if (currentStepData.length == 3) {
+                step.title = currentStepData[0];
+                step.media = currentStepData[1];
+                step.caption = currentStepData[2];
+                steps.push(step);
+            }
 
-        inputTitle.value = '';
-        inputCaption.value = '';
+            console.log('tutorial:', tutorial);
+            console.log('steps:', steps);
 
-        /*submit tutorial event listener {
-            input tutorial title, description and cover image
-            set inputs to new tutorial object of Tutorial class 
-        }
-        */
+            inputTitle.value = '';
+            inputCaption.value = '';
+
+            /*submit tutorial event listener {
+                input tutorial title, description and cover image
+                set inputs to new tutorial object of Tutorial class 
+            }
+            */
+        });
     });
-
 
 
     document.querySelector('#submit-steps').addEventListener('click', function() {
