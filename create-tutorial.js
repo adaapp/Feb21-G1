@@ -46,7 +46,7 @@ function beginTutorialCreation() {
 
         let inputTitle = document.querySelector('#input-step-title');
         let inputMedia = document.querySelector('#input-media');
-        let inputCaption = document.querySelector('#input-caption');
+        let inputCaption = document.querySeletcor('#input-caption');
 
         //input validation, cannot continue without populating fields
         if (inputTitle.value == '') {alert('Input a title for the step')}
