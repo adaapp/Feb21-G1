@@ -28,8 +28,13 @@ function generateId(type) {
     else {console.log('ERROR: Invalid type')}
 }
 
+function validateTextInputs(inputValue, field, dataArray) {
+    if (inputValue == '') {alert('The ' + field + ' field is empty.')}
+    else {dataArray.push(inputValue)}
+}
+
 function beginTutorialCreation() {
-    document.querySelector('#create-tutorial-button').classList.add('hidden');
+    document.querySelector('#begin-button').classList.add('hidden');
     document.querySelector('#create-tutorial-ui-container').classList.remove('hidden');
 
     //instantiate classes and set IDs
@@ -39,53 +44,79 @@ function beginTutorialCreation() {
     let steps = [];
 
     document.querySelector('#submit-tutorial').addEventListener('click', function() {
-        document.querySelector('#create-steps-ui-container').classList.remove('hidden');
+        tutorialInputArray = [];
 
-        document.querySelector('#new-step').addEventListener('click', function() {
-            let step = new Step;
-            step.id = generateId('step');
+        let inputTutorialTitle = document.querySelector('#input-tutorial-title');
+        validateTextInputs(inputTutorialTitle.value, 'tutorial title', tutorialInputArray);
 
-            let currentStepData = [];
+        let inputCategory = document.querySelector('#input-category');
+        validateTextInputs(inputCategory.value, 'tutorial category', tutorialInputArray);
 
-            let inputTitle = document.querySelector('#input-step-title');
-            let inputMedia = document.querySelector('#input-media');
-            let inputCaption = document.querySelector('#input-caption');
+        let inputDescription = document.querySelector('#input-description');
+        validateTextInputs(inputDescription.value, 'tutorial description', tutorialInputArray);
 
-            //input validation, cannot continue without populating fields
-            if (inputTitle.value == '') {alert('Input a title for the step')}
-            else {currentStepData.push(inputTitle.value)}
+        let inputCoverImage = document.querySelector('#input-cover-image');
+        /*
+        if (inputCoverImage.files.length == 0) {alert('upload a file for the step')}
+        else {stepInputArray.push(inputCoverImage.files[0])}
+        */
 
-            /*
-            if (inputMedia.files.length == 0) {alert('upload a file for the step')}
-            else {currentStepData.push(inputMedia.files[0])}
-            */
-            
-            //placeholder
-            currentStepData.push('media placeholder')
+        //placeholder
+        tutorialInputArray.push('media placeholder')
 
-            if (inputCaption.value == '') {alert('Input a caption for the step')}
-            else {currentStepData.push(inputCaption.value)}
+        console.log('tutorialInputArray:', tutorialInputArray);
+        if (tutorialInputArray.length == 4) {
+            tutorial.title = tutorialInputArray[0];
+            tutorial.category = tutorialInputArray[1];
+            tutorial.description = tutorialInputArray[2];
+            tutorial.coverImage = tutorialInputArray[3];
 
-            //assign input to new step object of Step class
-            if (currentStepData.length == 3) {
-                step.title = currentStepData[0];
-                step.media = currentStepData[1];
-                step.caption = currentStepData[2];
-                steps.push(step);
-            }
+            document.querySelector('#create-steps-ui-container').classList.remove('hidden');
+            document.querySelector('#new-step').addEventListener('click', function() {
+                let step = new Step;
+                step.id = generateId('step');
 
-            console.log('tutorial:', tutorial);
-            console.log('steps:', steps);
+                let stepInputArray = [];
 
-            inputTitle.value = '';
-            inputCaption.value = '';
+                let inputStepTitle = document.querySelector('#input-step-title');
+                let inputMedia = document.querySelector('#input-media');
+                let inputCaption = document.querySelector('#input-caption');
 
-            /*submit tutorial event listener {
-                input tutorial title, description and cover image
-                set inputs to new tutorial object of Tutorial class 
-            }
-            */
-        });
+                //input validation, cannot continue without populating fields
+                validateTextInputs(inputStepTitle.value, 'step title', stepInputArray);
+
+                /*
+                if (inputMedia.files.length == 0) {alert('upload a file for the step')}
+                else {stepInputArray.push(inputMedia.files[0])}
+                */
+                
+                //placeholder
+                stepInputArray.push('media placeholder')
+
+                validateTextInputs(inputCaption.value, 'step caption', stepInputArray);
+
+                //assign input to new step object of Step class
+                if (stepInputArray.length == 3) {
+                    step.title = stepInputArray[0];
+                    step.media = stepInputArray[1];
+                    step.caption = stepInputArray[2];
+                    steps.push(step);
+
+                    inputStepTitle.value = '';
+                    inputCaption.value = '';
+                }
+
+                console.log('tutorial:', tutorial);
+                console.log('steps:', steps);
+
+                /*
+                submit tutorial event listener {
+                    input tutorial title, description and cover image
+                    set inputs to new tutorial object of Tutorial class 
+                }
+                */
+            });
+        }
     });
 
 
@@ -97,5 +128,5 @@ function beginTutorialCreation() {
 }
 
 window.addEventListener('load', function() {
-    document.querySelector('#create-tutorial-button').addEventListener('click', beginTutorialCreation)
+    document.querySelector('#begin-button').addEventListener('click', beginTutorialCreation);
 });
