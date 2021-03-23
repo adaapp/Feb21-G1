@@ -1,8 +1,10 @@
 const sqlite3 = require('sqlite3').verbose();
-let { insertUsers } = require('./sql/insertUsers');
-let { createUsers } = require('./sql/createUsers');
-let { createMessages } = require('./sql/createMessages')
-let { createRatings } = require('./sql/createRatings');
+let { categoryTable } = require('./sql/category');
+let { tutorialTable } = require('./sql/createtutorial');
+let { instructionTable } = require('./sql/createinstruction');
+let { insertCategory } = require('./sql/insertcategory');
+let { insertTutorial } = require('./sql/inserttutorial');
+let { insertInstruction } = require('./sql/insertinstruction');
 
 function connect() {
   let db = new sqlite3.Database('./db/mydb.sqlite', (err) => {
@@ -22,28 +24,29 @@ function connect() {
 }
 
 function init(db) {
+
+
   db.serialize(() => {
-      db.run(createUsers, (err) => {
-        if (err) { console.log(err) } else { console.log("Creating table users") }
+      db.run(categoryTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Creating table Category") }
       });
-      db.run(createIndex, (err) => {
-        if (err) { console.log(err) } else { console.log("Creating index") }
+      db.run(tutorialTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Creating Tutorial") }
       });
-      db.run(insertUsers, (err) => {
-        if (err) { console.log(err) } else { console.log("Inserting some user") }
+      db.run(instructionTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Create Instruction") }
       });
-      db.run(createMessages, (err) => {
-        if (err) { console.log(err) } else { console.log("Creating table messages") }
+      db.run(insertCategory, (err) => {
+        if (err) { console.log(err) } else { console.log("insertCategory") }
       });
-      db.run(insertMessages, (err) => {
-        if (err) { console.log(err) } else { console.log("Inserting some messages") }
+      db.run(insertTutorial, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Tutorial") }
       });
-      db.run(insertMessageBFranklin, (err) => {
-        if (err) { console.log(err) } else { console.log("Inserting some messages") }
+      db.run(insertInstruction, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Instruction") }
       });
-      db.run(createRatings, (err) => {
-        if (err) { console.log(err) } else { console.log("Create table Ratings") }
-      });
+
+
   });
 }
 
