@@ -24,6 +24,8 @@ function connect() {
 }
 
 function init(db) {
+
+
   db.serialize(() => {
       db.run(categoryTable, (err) => {
         if (err) { console.log(err) } else { console.log("Creating table Category") }

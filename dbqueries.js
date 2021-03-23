@@ -47,9 +47,8 @@ function addingInstructions(db, req, res) {
         if (err) {
           return console.log(err.message)
     }
-        console.log(`${username} added to user field at position ${this.lastID}`)
-        userID = this.lastID
-        console.log("created new user " + userID);
+
+
         res.send({"ok":"ok"});
     })
 }
