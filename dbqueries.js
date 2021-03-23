@@ -41,8 +41,8 @@ function gettingAllTutorial(db, req, res) {
 }
 
 function addingInstructions(db, req, res) {
-    const { tutorial_title, step_id, step_title,step_info, photo_address } = req.body;
-    db.run(addInstruction, [tutorial_title, step_id, step_title,step_info, photo_address],
+    const { title, stepCount, stepTitle,stepMedia, stepInfo } = req.body;
+    db.run(addInstruction, [title, stepCount, stepTitle,stepInfo, stepMedia],
       function(err) {
         if (err) {
           return console.log(err.message)
@@ -54,14 +54,14 @@ function addingInstructions(db, req, res) {
 }
 
 function addingTutorials(db, req, res) {
-    const { tutorial_title, category_name,tutorial_description, tutorial_photo_address } = req.body;
-    db.run(addTutorial, [tutorial_title, category_name,tutorial_description, tutorial_photo_address],
+    const { title, description, coverImage, category  } = req.body;
+    db.run(addTutorial, [title, category,description, coverImage],
       function(err) {
         if (err) {
           return console.log(err.message)
     }
 
-        console.log("created new tutorial " + tutorial_title);
+        console.log("created new tutorial " + title);
         res.send({"ok":"ok"});
     })
 }
