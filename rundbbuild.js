@@ -5,6 +5,12 @@ let { instructionTable } = require('./sql/createinstruction');
 let { insertCategory } = require('./sql/insertcategory');
 let { insertTutorial } = require('./sql/inserttutorial');
 let { insertInstruction } = require('./sql/insertinstruction');
+let { recoveryTable } = require('./sql/createrecovery');
+let { usersTable } = require('./sql/createusers');
+let { ratingsTable } = require('./sql/createratings');
+let { insertUsers } = require('./sql/insertusers');
+let { insertRecovery } = require('./sql/insertrecovery');
+let { insertRatings } = require('./sql/insertratings');
 
 function connect() {
   let db = new sqlite3.Database('./db/mydb.sqlite', (err) => {
@@ -45,6 +51,25 @@ function init(db) {
       db.run(insertInstruction, (err) => {
         if (err) { console.log(err) } else { console.log("Inserting Instruction") }
       });
+      db.run(recoveryTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Create Recovery") }
+      });
+      db.run(usersTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Create Users") }
+      });
+      db.run(ratingsTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Create Ratings") }
+      });
+      db.run(insertRecovery, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Recovery") }
+      });
+      db.run(insertUsers, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Users") }
+      });
+      db.run(insertRatings, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Ratings") }
+      });
+      
 
 
   });
