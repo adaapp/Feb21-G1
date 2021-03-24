@@ -8,9 +8,11 @@ let { insertInstruction } = require('./sql/insertinstruction');
 let { recoveryTable } = require('./sql/createrecovery');
 let { usersTable } = require('./sql/createusers');
 let { ratingsTable } = require('./sql/createratings');
+let { commentsTable } = require('./sql/createcomments');
 let { insertUsers } = require('./sql/insertusers');
 let { insertRecovery } = require('./sql/insertrecovery');
 let { insertRatings } = require('./sql/insertratings');
+let { insertComments } = require('./sql/insertcomments');
 
 function connect() {
   let db = new sqlite3.Database('./db/mydb.sqlite', (err) => {
@@ -60,6 +62,9 @@ function init(db) {
       db.run(ratingsTable, (err) => {
         if (err) { console.log(err) } else { console.log("Create Ratings") }
       });
+      db.run(commentsTable, (err) => {
+        if (err) { console.log(err) } else { console.log("Create Comments") }
+      });
       db.run(insertRecovery, (err) => {
         if (err) { console.log(err) } else { console.log("Inserting Recovery") }
       });
@@ -69,7 +74,9 @@ function init(db) {
       db.run(insertRatings, (err) => {
         if (err) { console.log(err) } else { console.log("Inserting Ratings") }
       });
-      
+      db.run(insertComments, (err) => {
+        if (err) { console.log(err) } else { console.log("Inserting Comments") }
+      });
 
 
   });
