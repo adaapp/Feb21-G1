@@ -4,9 +4,9 @@
 
     /* Remove the navbar's default margin-bottom and rounded borders */ 
 
- {
+ 
 
-  }
+  
 
     .navbar {
       margin-bottom: 0;
@@ -60,5 +60,23 @@
     .carousel-caption {
       display: none; 
     }
+  }
+  .tutorial-top {
+  
+    width: 800px;
+    height: 50px;
+    background-color: rgb(55, 55, 88);
+  }
+  .tutorial-middle {
+    
+    width: 800px;
+    height: 350px;
+    background-color: rgb(211, 111, 29);
+  }
+  .tutorial-bottom {
+    
+    width: 800px;
+    height: 200px;
+    background-color: rgb(29, 205, 211);
   }
  

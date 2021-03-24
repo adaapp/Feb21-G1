@@ -184,26 +184,35 @@ container.appendChild(ol);
                     const heading = document.createElement("h2");
                     heading.textContent = res[0].tutorial_title;
                     ol.appendChild(heading);
-    res.forEach(user => {
 
+        res.forEach(user => {
+            const { step_id , step_title, photo_address, title, step_info } = user;
+            const newDiv1 = document.createElement("div");
+            const newDiv2 = document.createElement("div");
+            const newDiv3 = document.createElement("div");
+            const newDiv4 = document.createElement("div");
+            const newContent = document.createTextNode('Step:' + step_id +' Title: ' + step_title);
+            newDiv1.classList.add('tutorial-top')
+            newDiv1.appendChild(newContent);
+            
+            var img = document.createElement('img');
+            img.src = photo_address;
+            newDiv2.classList.add('tutorial-middle')
+            newDiv2.appendChild(img);
+            const newContent3 = document.createTextNode('Info: ' + step_info);
+            newDiv3.classList.add('tutorial-bottom')
+            newDiv3.appendChild(newContent3);
+            const newContent4 = document.createTextNode('');
+            newDiv4.appendChild(newContent4);
+            newDiv4.classList.add('add-gap')
 
-    const li1 = document.createElement('li');
-    const li2 = document.createElement('li');
-    const li3 = document.createElement('li');
-    
-    const { step_id , step_title, photo_address, title, step_info } = user;
-    const heading = document.createElement("h4");
-    heading.textContent = "Step:" + step_id;
-    ol.appendChild(heading);
-    li1.appendChild(document.createTextNode('Title: ' + step_title));
-    li2.appendChild(document.createTextNode('Photo: ' + photo_address));
-    li3.appendChild(document.createTextNode('Info: ' + step_info));
+            container.appendChild(newDiv1);
+            container.appendChild(newDiv2);
+            container.appendChild(newDiv3);
+            container.appendChild(newDiv4);
+            
 
-    
-    ol.appendChild(li1);
-    ol.appendChild(li2);
-    ol.appendChild(li3);
-});
+        })
                 })
 }
 getTutorial('Lasagne')
