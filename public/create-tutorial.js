@@ -170,3 +170,40 @@ function addInstuction(title, step){
         }).then(res => res.json())
         
 }
+function getTutorial(tutorial_name){
+  const container = document.getElementById('sorted-users-div-shown');
+
+  const heading = document.createElement("h1");
+  heading.textContent = "Sorted Users";
+  container.appendChild(heading);
+  const ol=document.createElement('ol');
+container.appendChild(ol);
+ fetch('/api/get-by-id/Lasagne')
+                .then((res)=>res.json())
+                .then(res=> {console.log(res)
+                    const heading = document.createElement("h2");
+                    heading.textContent = res[0].tutorial_title;
+                    ol.appendChild(heading);
+    res.forEach(user => {
+
+
+    const li1 = document.createElement('li');
+    const li2 = document.createElement('li');
+    const li3 = document.createElement('li');
+    
+    const { step_id , step_title, photo_address, title, step_info } = user;
+    const heading = document.createElement("h4");
+    heading.textContent = "Step:" + step_id;
+    ol.appendChild(heading);
+    li1.appendChild(document.createTextNode('Title: ' + step_title));
+    li2.appendChild(document.createTextNode('Photo: ' + photo_address));
+    li3.appendChild(document.createTextNode('Info: ' + step_info));
+
+    
+    ol.appendChild(li1);
+    ol.appendChild(li2);
+    ol.appendChild(li3);
+});
+                })
+}
+getTutorial('Lasagne')
