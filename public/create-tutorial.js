@@ -144,16 +144,50 @@ window.addEventListener('load', function() {
     beginTutorialCreation();
 });
 
+function populateSteps(stepObject) {
+    let stepContainer = document.createElement('div');
+    stepContainer.classList.add('item');
+
+    if (stepObject.step_id == 1) {stepContainer.classList.add('active')}
+
+    let count = document.createElement('p');
+    count.innerText = stepObject.step_id.toString();
+        
+    let title = document.createElement('h1');
+    title.innerText = stepObject.step_title;
+
+    let tutorialHeader = document.createElement('div');
+    tutorialHeader.classList.add('tutorial-top');
+    tutorialHeader.appendChild(count);
+    tutorialHeader.appendChild(title);
+
+    stepContainer.appendChild(tutorialHeader);
+
+    let media = document.createElement('p'); //change to image tag when we have images working
+    media.innerText = stepObject.photo_adress;
+
+    let tutorialMiddle = document.createElement('div');
+    tutorialMiddle.classList.add('tutorial-middle');
+    tutorialMiddle.appendChild(media);
+    stepContainer.appendChild(tutorialMiddle);
+    
+    let caption = document.createElement('p');
+    caption.innerText = stepObject.step_info;
+
+    tutorialBottom = document.createElement('div');
+    tutorialBottom.classList.add('tutorial-bottom');
+    tutorialBottom.appendChild(caption);
+    stepContainer.appendChild(tutorialBottom);
+}
+
 function addTutorial(tutorial){
     let body = JSON.stringify(tutorial);
     fetch("/api/add-tutorial", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body,
-            credentials: 'same-origin'
-        }).then(res => res.json())
-        
-        
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        credentials: 'same-origin'
+    }).then(res => res.json());
 }
 
 function addInstuction(title, step){
@@ -170,40 +204,32 @@ function addInstuction(title, step){
         }).then(res => res.json())
         
 }
+
 function getTutorial(tutorial_name){
-  const container = document.getElementById('sorted-users-div-shown');
+    const container = document.getElementById('sorted-users-div-shown');
 
-  const heading = document.createElement("h1");
-  heading.textContent = "Sorted Users";
-  container.appendChild(heading);
-  const ol=document.createElement('ol');
-container.appendChild(ol);
- fetch('/api/get-by-id/Lasagne')
-                .then((res)=>res.json())
-                .then(res=> {console.log(res)
-                    const heading = document.createElement("h2");
-                    heading.textContent = res[0].tutorial_title;
-                    ol.appendChild(heading);
-    res.forEach(user => {
+    const heading = document.createElement("h1");
+    heading.textContent = "Sorted Users";
+    container.appendChild(heading);
+    const ol=document.createElement('ol');
+    container.appendChild(ol);
+
+    fetch('/api/get-by-id/Lasagne')
+        .then((res)=>res.json())
+        .then(res=> {console.log(res)
+            const heading = document.createElement("h2");
+            heading.textContent = res[0].tutorial_title;
+            ol.appendChild(heading);
+
+        res.forEach(user => {
+            console.log(user);
+            populateSteps(user);
 
 
-    const li1 = document.createElement('li');
-    const li2 = document.createElement('li');
-    const li3 = document.createElement('li');
-    
-    const { step_id , step_title, photo_address, title, step_info } = user;
-    const heading = document.createElement("h4");
-    heading.textContent = "Step:" + step_id;
-    ol.appendChild(heading);
-    li1.appendChild(document.createTextNode('Title: ' + step_title));
-    li2.appendChild(document.createTextNode('Photo: ' + photo_address));
-    li3.appendChild(document.createTextNode('Info: ' + step_info));
 
-    
-    ol.appendChild(li1);
-    ol.appendChild(li2);
-    ol.appendChild(li3);
-});
-                })
+        });
+    })
 }
-getTutorial('Lasagne')
+
+getTutorial('Lasagne');
+
