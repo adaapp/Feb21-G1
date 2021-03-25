@@ -61,4 +61,28 @@
       display: none; 
     }
   }
- 
+ .container-for-image{
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: DodgerBlue;
+    justify-content: space-around;
+
+
+
+ }
+
+.inline-block {
+   display: inline-block;
+}
+
+#thumbs-down{
+  float: right;
+}
+
+#thumbs-up{
+  float: right;
+  transform:rotate(90deg);
+}
+#medium-face{
+  float: right;
+}
