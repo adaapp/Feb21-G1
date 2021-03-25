@@ -1,89 +1,57 @@
-let testStepData = [
-    {
-        caption: "EGEWGGW",
-        id: "STEPpx1jg019o",
-        media: "media placeholder",
-        stepCount: 1,
-        title: "EGWGWGE",
-    },
-    {
-        caption: "HRTHR",
-        id: "STEPevlr2u4vt",
-        media: "media placeholder",
-        stepCount: 2,
-        title: "HJTRH",
-    },
-    {
-        caption: "THRRHTRHT",
-        id: "STEPvci2z4rip",
-        media: "media placeholder",
-        stepCount: 3,
-        title: "HTRHRTHRT",
-    },
-    {
-        caption: "HTTHRHT",
-        id: "STEPlwnhfi2vw",
-        media: "media placeholder",
-        stepCount: 4,
-        title: "RHTRHT",
-    },
-    {
-        caption: "FWEWEFFW",
-        id: "STEPm00f9xkns",
-        media: "media placeholder",
-        stepCount: 5,
-        title: "JRJRJRR",
-    },
-    {
-        caption: "RWGRWRGWGRW",
-        id: "STEPb9pqwwepx",
-        media: "media placeholder",
-        stepCount: 6,
-        title: "FEWGWGR",
-    },
-    {
-        caption: "GRGRGRGR",
-        id: "STEPcpmcfn537",
-        media: "media placeholder",
-        stepCount: 7,
-        title: "GRGRGR",
-    }
-];
+function populateSteps(stepObject) {
 
-let testTutorialData = {
-    category: "EGEGWEG",
-    coverImage: "media placeholder",
-    description: "EGEGEG",
-    id: "TUT1l049rexj",
-    title: "GEEGWEGW"
-};
+    let stepContainer = document.createElement('div');
 
-function populateSteps() {
-    for (let i=0; i<testStepData.length; i++) {
-        let stepContainer = document.createElement('div');
+    let count = document.createElement('p');
+    count.innerText = stepObject.step_id.toString();
+        
+    let title = document.createElement('h1');
+    title.innerText = stepObject.step_title;
 
-        let count = document.createElement('p');
-        count.innerText = testStepData[i].stepCount.toString();
-        stepContainer.appendChild(count);
-            
-        let title = document.createElement('h1');
-        //title.innerHTML = '<span>' + testStepData[i].stepCount.toString() + '</span>';
-        title.innerText = testStepData[i].title;
-        console.log(title);
-        stepContainer.appendChild(title);
+    let tutorialHeader = document.createElement('div');
+    tutorialHeader.classList.add('tutorial-top');
+    tutorialHeader.appendChild(count);
+    tutorialHeader.appendChild(title);
 
-        let media = document.createElement('p'); //change to image tag when we have images working
-        media.innerText = testStepData[i].media;
-        stepContainer.appendChild(media);
+    stepContainer.appendChild(tutorialHeader);
 
-        let caption = document.createElement('p');
-        caption.innerText = testStepData[i].caption;
-        stepContainer.appendChild(caption);
+    let media = document.createElement('p'); //change to image tag when we have images working
+    media.innerText = stepObject.photo_adress;
 
-        document.body.appendChild(stepContainer);
-    }
+    let tutorialMiddle = document.createElement('div');
+    tutorialMiddle.classList.add('tutorial-middle');
+    tutorialMiddle.appendChild(media);
+    stepContainer.appendChild(tutorialMiddle);
+    
+    let caption = document.createElement('p');
+    caption.innerText = stepObject.step_info;
+
+    tutorialBottom = document.createElement('div');
+    tutorialBottom.classList.add('tutorial-bottom');
+    tutorialBottom.appendChild(caption);
+    stepContainer.appendChild(tutorialBottom);
+}
+
+function getTutorial(tutorial_name){
+    const container = document.getElementById('tutorial');
+    container.appendChild(heading);
+    const ol = document.createElement('ol');
+    container.appendChild(ol);
+
+    fetch('/api/get-by-id/Lasagne')
+        .then((res)=>res.json())
+        .then(res=> {console.log(res)
+            const heading = document.createElement("h2");
+            heading.textContent = res[0].tutorial_title;
+            ol.appendChild(heading);
+
+        res.forEach(step => {
+            console.log(step);
+            populateSteps(step);
+        });
+    })
 }
 
 window.addEventListener('load', function() {
-    populateSteps();
+    getTutorial('Lasagne');
 });
