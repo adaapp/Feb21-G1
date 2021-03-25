@@ -11,6 +11,9 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res) {
     res.sendFile("public/create-tutorial.html", { root: __dirname })
 });
+app.get('/category-tutorial', function(req, res) {
+    res.sendFile("public/category-tutorial.html", { root: __dirname })
+});
 app.get('/api/get-all-instructions', function(req, res) {
     query.getInstruction(db,req,res)
 });
