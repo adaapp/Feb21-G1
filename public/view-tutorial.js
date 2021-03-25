@@ -46,7 +46,7 @@ function getTutorial(tutorial_name){
     const ol = document.createElement('ol');
     container.appendChild(ol);
 
-    fetch('/api/get-by-id/Lasagne')
+    fetch('/api/get-by-id/' + tutorial_name)
         .then((res)=>res.json())
         .then(res=> {console.log(res)
             const heading = document.createElement("h2");
@@ -61,5 +61,8 @@ function getTutorial(tutorial_name){
 }
 
 window.addEventListener('load', function() {
-    getTutorial('Lasagne');
+    var sch1 = window.location;
+    var tutorial = sch1.search.split('=')
+
+    getTutorial(tutorial[tutorial.length -1]);
 });
