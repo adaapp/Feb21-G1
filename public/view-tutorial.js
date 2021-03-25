@@ -15,12 +15,14 @@ function populateSteps(stepObject) {
 
     stepContainer.appendChild(tutorialHeader);
 
-    let media = document.createElement('p'); //change to image tag when we have images working
-    media.innerText = stepObject.photo_adress;
+    var img = document.createElement('img');
+    img.src = stepObject.photo_address;
+    img.classList.add('step-image');
+    
 
     let tutorialMiddle = document.createElement('div');
     tutorialMiddle.classList.add('tutorial-middle');
-    tutorialMiddle.appendChild(media);
+    tutorialMiddle.appendChild(img);
     stepContainer.appendChild(tutorialMiddle);
     
     let caption = document.createElement('p');
@@ -30,11 +32,17 @@ function populateSteps(stepObject) {
     tutorialBottom.classList.add('tutorial-bottom');
     tutorialBottom.appendChild(caption);
     stepContainer.appendChild(tutorialBottom);
+
+    const newDiv4 = document.createElement("div");
+    const newContent4 = document.createTextNode('');
+    newDiv4.appendChild(newContent4);
+    newDiv4.classList.add('add-gap')
+    stepContainer.appendChild(newDiv4)
+    document.querySelector('#tutorial').appendChild(stepContainer);
 }
 
 function getTutorial(tutorial_name){
     const container = document.getElementById('tutorial');
-    container.appendChild(heading);
     const ol = document.createElement('ol');
     container.appendChild(ol);
 

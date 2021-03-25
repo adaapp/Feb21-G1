@@ -5,6 +5,7 @@
 img {
     max-width: 100%;
     max-height: 100%;
+    
 }
   
 .navbar-inverse {
@@ -51,10 +52,18 @@ footer {
 
 #thumbs-up{
   float: right;
-  transform:rotate(90deg);
+
 }
+
 #medium-face{
   float: right;
+}
+
+.step-image {
+  max-width: 100%;
+  max-height: 100%;
+  display:block;
+  margin:auto;
 }
 
 .tutorial-top {
@@ -62,15 +71,10 @@ footer {
     margin: auto;
     width: 800px;
     height: 50px;
-    background-color: rgb(118, 197, 197,0.8);
+    background-color: rgb(34,142,192,0.2);
     display: flex;
     justify-content: center; /* align horizontal */
     align-items: center;
-}
-
-img {
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .tutorial-middle {
@@ -78,7 +82,8 @@ img {
     margin: auto;
     width: 800px;
     height: 350px;
-    background-color: rgb(171, 152, 182);
+    background-color: rgb(34,142,192,0.2);
+
 }
 
 .tutorial-bottom {
@@ -88,7 +93,7 @@ img {
     width: 800px;
     min-height: 200px;
     height: auto;
-    background-color: rgb(118, 197, 197,0.8);
+    background-color: rgb(34,142,192,0.2);
 }
 
 .add-gap {
