@@ -14,6 +14,9 @@ app.get('/', function(req, res) {
 app.get('/category-tutorial', function(req, res) {
     res.sendFile("public/category-tutorial.html", { root: __dirname })
 });
+app.get('/home', function(req, res) {
+    res.sendFile("public/home.html", { root: __dirname })
+});
 app.get('/api/get-all-instructions', function(req, res) {
     query.getInstruction(db,req,res)
 });
