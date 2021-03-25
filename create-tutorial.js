@@ -145,47 +145,39 @@ window.addEventListener('load', function() {
 });
 
 function populateSteps(stepObject) {
-    /*
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="https://placehold.it/1200x400?text=IMAGE" alt="CookingImage">
-        <div class="carousel-caption">
-          <h3>Tutorial</h3>
-          <p>Cooking</p>
-        </div>      
-    </div>
-    */
-
 
     let stepContainer = document.createElement('div');
-    stepContainer.classList.add('item');
-
-    if (stepObject.step_id == 1) {stepContainer.classList.add('active')}
 
     let count = document.createElement('p');
     count.innerText = stepObject.step_id.toString();
-    stepContainer.appendChild(count);
         
     let title = document.createElement('h1');
-    //title.innerHTML = '<span>' + stepObject.stepCount.toString() + '</span>';
     title.innerText = stepObject.step_title;
-    title.classList.add('tutorial-top');
-    console.log(title);
 
     let tutorialHeader = document.createElement('div');
-    
-    stepContainer.appendChild(title);
+    tutorialHeader.classList.add('tutorial-top');
+    tutorialHeader.appendChild(count);
+    tutorialHeader.appendChild(title);
+
+    stepContainer.appendChild(tutorialHeader);
 
     let media = document.createElement('p'); //change to image tag when we have images working
     media.innerText = stepObject.photo_adress;
-    stepContainer.appendChild(media);
 
+    let tutorialMiddle = document.createElement('div');
+    tutorialMiddle.classList.add('tutorial-middle');
+    tutorialMiddle.appendChild(media);
+    stepContainer.appendChild(tutorialMiddle);
+    
     let caption = document.createElement('p');
     caption.innerText = stepObject.step_info;
-    stepContainer.appendChild(caption);
 
-    document.querySelector('div.tutorial.carousel-inner').appendChild(stepContainer);
+    tutorialBottom = document.createElement('div');
+    tutorialBottom.classList.add('tutorial-bottom');
+    tutorialBottom.appendChild(caption);
+    stepContainer.appendChild(tutorialBottom);
+
+    document.body.appendChild(stepContainer);
 }
 
 function addTutorial(tutorial){
@@ -238,4 +230,6 @@ function getTutorial(tutorial_name){
         });
     })
 }
-getTutorial('Lasagne')
+
+getTutorial('Lasagne');
+
